@@ -1,19 +1,19 @@
-import { useMemo } from 'react';
-import { StyleSheet, View, useColorScheme } from 'react-native';
-import { CalendarList, LocaleConfig } from 'react-native-calendars';
-import { GoogleCalendarDayItem } from './GoogleCalendarDay';
-import { Theme as CalendarTheme } from 'react-native-calendars/src/types';
-import { useCalendarEvents } from '@/hooks/useCalendarEvents';
+import { useMemo } from "react";
+import { useCalendarEvents } from "@/hooks/useCalendarEvents";
+import { StyleSheet, View, useColorScheme } from "react-native";
+import { CalendarList, LocaleConfig } from "react-native-calendars";
+import { Theme as CalendarTheme } from "react-native-calendars/src/types";
+import { GoogleCalendarDayItem } from "./GoogleCalendarDay";
 
 // カレンダーの表示言語設定
 // 多言語対応を行う場合は日本語以外にも切り替えられるよう実装が必要
 LocaleConfig.locales.jp = {
-  monthNames: ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月'],
-  monthNamesShort: ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月'],
-  dayNames: ['日曜日', '月曜日', '火曜日', '水曜日', '木曜日', '金曜日', '土曜日'],
-  dayNamesShort: ['日', '月', '火', '水', '木', '金', '土'],
+  monthNames: ["1月", "2月", "3月", "4月", "5月", "6月", "7月", "8月", "9月", "10月", "11月", "12月"],
+  monthNamesShort: ["1月", "2月", "3月", "4月", "5月", "6月", "7月", "8月", "9月", "10月", "11月", "12月"],
+  dayNames: ["日曜日", "月曜日", "火曜日", "水曜日", "木曜日", "金曜日", "土曜日"],
+  dayNamesShort: ["日", "月", "火", "水", "木", "金", "土"]
 };
-LocaleConfig.defaultLocale = 'jp';
+LocaleConfig.defaultLocale = "jp";
 
 const PAST_RANGE = 24;
 const FUTURE_RANGE = 24;
@@ -26,12 +26,12 @@ export const GoogleCalendar = () => {
   // カレンダーのテーマを定義
   const calendarTheme: CalendarTheme = useMemo(
     () => ({
-      monthTextColor: '#000',
-      textMonthFontWeight: 'bold',
-      calendarBackground: 'transparent',
-      arrowColor: '#0000ff',
+      monthTextColor: "#000",
+      textMonthFontWeight: "bold",
+      calendarBackground: "transparent",
+      arrowColor: "#0000ff"
     }),
-    [theme],
+    [theme]
   );
 
   return (
@@ -57,6 +57,6 @@ export const GoogleCalendar = () => {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-  },
+    flex: 1
+  }
 });
