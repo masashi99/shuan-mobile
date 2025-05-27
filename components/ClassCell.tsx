@@ -5,12 +5,12 @@ type Props = {
   unitName?: string;
 };
 
-export function ClassUnit({ subjectName, unitName }: Props) {
+export function ClassCell({ subjectName, unitName }: Props) {
   return (
     <View style={styles.container}>
       <View style={styles.inner}>
-        <Text style={styles.subjectName}>{subjectName}</Text>
-        <View style={styles.unitName}>{unitName}</View>
+        <Text style={styles.subjectName}>hoge</Text>
+        <Text style={styles.unitName}>fuga</Text>
       </View>
     </View>
   );
@@ -19,19 +19,15 @@ export function ClassUnit({ subjectName, unitName }: Props) {
 const styles = {
   container: {
     flex: 1,
-    borderRightWidth: 1,
-    padding: 8,
-    height: 6
+    borderRightWidth: 0.5
   },
-  inner: {
-    padding: 8,
-    borderRadius: 4
-  },
+  inner: {},
   subjectName: {
+    fontSize: 12,
     fontWeight: "bold"
   },
   unitName: {
-    fontSize: 12,
+    fontSize: 10,
     marginTop: 4
   }
 } as const;

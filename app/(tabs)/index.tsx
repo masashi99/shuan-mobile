@@ -1,15 +1,12 @@
-import { ClassUnit } from "@/components/ClassUnit";
-import { StatusBar } from "expo-status-bar";
+import { Shuan } from "@/components/Shuan";
 import { ScrollView, StyleSheet, View } from "react-native";
 
 export default function App() {
   return (
     <View style={styles.container}>
-      <StatusBar style="auto" />
-      <ScrollView contentContainerStyle={{ paddingTop: 48 }}>
-        {/* <GoogleCalendar /> */}
-        <View style={{ padding: 16 }}>
-          <ClassUnit />
+      <ScrollView contentContainerStyle={{ flex: 1 }}>
+        <View style={{ flex: 1, padding: 16 }}>
+          <Shuan />
         </View>
       </ScrollView>
     </View>
