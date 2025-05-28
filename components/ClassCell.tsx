@@ -8,10 +8,8 @@ type Props = {
 export function ClassCell({ subjectName, unitName }: Props) {
   return (
     <View style={styles.container}>
-      <View style={styles.inner}>
-        <Text style={styles.subjectName}>hoge</Text>
-        <Text style={styles.unitName}>fuga</Text>
-      </View>
+      <Text style={styles.subjectName}>{subjectName || "hoge"}</Text>
+      <Text style={styles.unitName}>{unitName || "fuga"}</Text>
     </View>
   );
 }
@@ -19,9 +17,9 @@ export function ClassCell({ subjectName, unitName }: Props) {
 const styles = {
   container: {
     flex: 1,
-    borderRightWidth: 0.5
+    padding: 2,
+    backgroundColor: "#f0f0f0"
   },
-  inner: {},
   subjectName: {
     fontSize: 12,
     fontWeight: "bold"

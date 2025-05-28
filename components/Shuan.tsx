@@ -1,5 +1,4 @@
-import { Class } from "./Class";
-import { PeriodLabel } from "./PeriodLabel";
+import { ShuanBody } from "./ShuanBody";
 import { WeeklyHeader } from "./WeeklyHeader";
 import { View } from "react-native";
 
@@ -95,14 +94,7 @@ export function Shuan() {
     <View style={{ flex: 1, gap: 8 }}>
       <WeeklyHeader />
       <View style={{ flex: 1, flexDirection: "row", gap: 4 }}>
-        <View>
-          <PeriodLabel />
-        </View>
-        <View style={{ flex: 1, flexDirection: "row" }}>
-          {Data.map((dayClasses, index) => (
-            <Class key={index} classes={dayClasses} />
-          ))}
-        </View>
+        <ShuanBody />
       </View>
     </View>
   );
