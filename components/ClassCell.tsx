@@ -17,7 +17,7 @@ export function ClassCell({ subjectName, unitName }: Props) {
 const styles = {
   container: {
     flex: 1,
-    padding: 2,
+    padding: 4,
     backgroundColor: "#f0f0f0"
   },
   subjectName: {

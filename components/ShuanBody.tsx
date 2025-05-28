@@ -15,7 +15,7 @@ const PERIODS: { period: Period; name: string; isClass: boolean }[] = [
     isClass: true
   },
   {
-    period: "Third",
+    period: "Second",
     name: "2",
     isClass: true
   },
@@ -25,12 +25,12 @@ const PERIODS: { period: Period; name: string; isClass: boolean }[] = [
     isClass: false
   },
   {
-    period: "Fourth",
+    period: "Third",
     name: "3",
     isClass: true
   },
   {
-    period: "Fifth",
+    period: "Fourth",
     name: "4",
     isClass: true
   },
@@ -139,7 +139,10 @@ export function ShuanBody() {
     <View style={{ flex: 1 }}>
       {PERIODS.map((period) => {
         return (
-          <View key={period.period} style={{ flex: 1, flexDirection: "row" }}>
+          <View
+            key={period.period}
+            style={[{ flexDirection: "row", flexBasis: 0, flexGrow: period.isClass ? 1 : 0.5 }]}
+          >
             <Text style={{ width: 18, padding: 4 }}>{period.name}</Text>
             {dates.map((date) => {
               const targetClassData = classes.find((classData) => {
