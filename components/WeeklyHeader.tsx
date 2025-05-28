@@ -18,5 +18,5 @@ export function WeeklyHeader() {
 }
 
 function Dummy() {
-  return <View style={{ width: 18, paddingHorizontal: 4 }} />;
+  return <View style={{ width: 18, paddingHorizontal: 4, marginRight: 4 }} />;
 }

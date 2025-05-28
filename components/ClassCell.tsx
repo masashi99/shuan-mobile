@@ -8,8 +8,8 @@ type Props = {
 export function ClassCell({ subjectName, unitName }: Props) {
   return (
     <View style={styles.container}>
-      <Text style={styles.subjectName}>{subjectName || "hoge"}</Text>
-      <Text style={styles.unitName}>{unitName || "fuga"}</Text>
+      <Text style={styles.subjectName}>{subjectName}</Text>
+      <Text style={styles.unitName}>{unitName}</Text>
     </View>
   );
 }

@@ -137,24 +137,31 @@ export function ShuanBody() {
 
   return (
     <View style={{ flex: 1 }}>
-      {PERIODS.map((period) => {
+      {PERIODS.map((period, periodIndex) => {
         return (
           <View
             key={period.period}
             style={[{ flexDirection: "row", flexBasis: 0, flexGrow: period.isClass ? 1 : 0.5 }]}
           >
-            <Text style={{ width: 18, padding: 4 }}>{period.name}</Text>
-            {dates.map((date) => {
+            <Text style={{ width: 18, padding: 4, fontSize: 12, marginRight: 4 }}>{period.name}</Text>
+            {dates.map((date, dateIndex) => {
               const targetClassData = classes.find((classData) => {
                 return classData.period === period.period && isSameDay(new Date(classData.date), date);
               });
 
               return (
-                <ClassCell
-                  key={targetClassData?.id || `${date.toISOString()}-${period.period}`}
-                  subjectName={targetClassData?.subjectName}
-                  unitName={targetClassData?.unitName}
-                />
+                <View
+                  key={`${date.toISOString()}-${period.period}`}
+                  style={[
+                    { flex: 1, borderRightWidth: 0.5, borderBottomWidth: 0.5 },
+                    dateIndex === 0 && { borderLeftWidth: 0.5 },
+                    periodIndex === 0 && {
+                      borderTopWidth: 0.5
+                    }
+                  ]}
+                >
+                  <ClassCell subjectName={targetClassData?.subjectName} unitName={targetClassData?.unitName} />
+                </View>
               );
             })}
           </View>
