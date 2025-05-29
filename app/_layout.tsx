@@ -1,14 +1,15 @@
-import { Stack } from "expo-router";
-import { StatusBar } from "expo-status-bar";
+import { Drawer } from "expo-router/drawer";
 
 export default function RootLayout() {
   return (
-    <>
-      <Stack>
-        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-        <Stack.Screen name="+not-found" />
-      </Stack>
-      <StatusBar style="light" />
-    </>
+    <Drawer screenOptions={{ swipeEnabled: false }}>
+      <Drawer.Screen
+        name="index"
+        options={{
+          title: "Home",
+          headerTitle: "Hoge"
+        }}
+      />
+    </Drawer>
   );
 }
