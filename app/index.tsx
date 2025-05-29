@@ -5,9 +5,7 @@ export default function App() {
   return (
     <View style={styles.container}>
       <ScrollView contentContainerStyle={{ flex: 1 }}>
-        <View style={{ flex: 1, padding: 16 }}>
-          <Shuan />
-        </View>
+        <Shuan />
       </ScrollView>
     </View>
   );
@@ -16,6 +14,7 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff"
+    backgroundColor: "#fff",
+    padding: 8
   }
 });
