@@ -130,10 +130,14 @@ const Data: ClassData[] = [
   }
 ];
 
-export function ShuanBody() {
-  const [currentWeekStartDay, currentWeekEndDay] = calcWeekStartAndEdnDates(new Date());
-  const classes = filterClassesBetweenDays(Data, currentWeekStartDay, currentWeekEndDay);
-  const dates = getDateRange(currentWeekStartDay, currentWeekEndDay);
+type Props = {
+  weekStartDate: Date;
+};
+
+export function ShuanBody({ weekStartDate }: Props) {
+  const currentWeekEndDay = getWeekEndDateFromStartDate(weekStartDate);
+  const classes = filterClassesBetweenDays(Data, weekStartDate, currentWeekEndDay);
+  const dates = getDateRange(weekStartDate, currentWeekEndDay);
 
   return (
     <View style={{ flex: 1 }}>
@@ -171,15 +175,10 @@ export function ShuanBody() {
   );
 }
 
-function calcWeekStartAndEdnDates(date: Date): [Date, Date] {
-  const day = date.getDay();
-  const diff = date.getDate() - day + (day === 0 ? -6 : 1);
-  const currentWeekStartDay = new Date(date);
-  currentWeekStartDay.setDate(diff);
-  currentWeekStartDay.setHours(0, 0, 0, 0);
-  const currentWeekEndDay = new Date(currentWeekStartDay);
-  currentWeekEndDay.setDate(currentWeekStartDay.getDate() + 5);
-  return [currentWeekStartDay, currentWeekEndDay];
+function getWeekEndDateFromStartDate(startDate: Date) {
+  const endDate = new Date(startDate);
+  endDate.setDate(startDate.getDate() + 5);
+  return endDate;
 }
 
 function filterClassesBetweenDays(classes: ClassData[], startDate: Date, endDate: Date): ClassData[] {
