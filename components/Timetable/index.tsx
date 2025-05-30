@@ -22,10 +22,6 @@ const DAYS = [
   {
     day: "Fri",
     label: "金"
-  },
-  {
-    day: "Sat",
-    label: "土"
   }
 ];
 
