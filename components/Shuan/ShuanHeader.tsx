@@ -5,7 +5,7 @@ type Props = {
   dates: Date[];
 };
 
-const DATE: { [day: number]: string } = {
+const DAYS: { [day: number]: string } = {
   0: "日",
   1: "月",
   2: "火",
@@ -15,14 +15,14 @@ const DATE: { [day: number]: string } = {
   6: "土"
 };
 
-export function WeeklyHeader({ dates }: Props) {
+export function ShuanHeader({ dates }: Props) {
   return (
     <View style={{ flexDirection: "row", justifyContent: "center" }}>
       <Dummy />
       {dates.map((date) => {
         return (
           <View key={date.toISOString()} style={{ flex: 1 }}>
-            <Text style={{ textAlign: "center" }}>{DATE[date.getDay()]}</Text>
+            <Text style={{ textAlign: "center" }}>{DAYS[date.getDay()]}</Text>
             <Text style={{ textAlign: "center", fontSize: 8 }}>{format(date, "M/d")}</Text>
           </View>
         );

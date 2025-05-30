@@ -3,7 +3,7 @@ import { View } from "react-native";
 
 export default function Page() {
   return (
-    <View style={{ padding: 8 }}>
+    <View style={{ flex: 1, padding: 8, backgroundColor: "#fff" }}>
       <Timetable />
     </View>
   );

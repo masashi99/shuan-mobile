@@ -1,5 +1,5 @@
 import { ShuanBody } from "./ShuanBody";
-import { WeeklyHeader } from "./WeeklyHeader";
+import { ShuanHeader } from "./ShuanHeader";
 import { addWeeks, subWeeks } from "date-fns";
 import { useRef, useState } from "react";
 import { FlatList, LayoutChangeEvent, NativeScrollEvent, NativeSyntheticEvent, View } from "react-native";
@@ -64,7 +64,7 @@ export function Shuan() {
         })}
         renderItem={({ item }) => (
           <View style={{ flex: 1, gap: 4, width: containerWidth }}>
-            <WeeklyHeader dates={item.dates} />
+            <ShuanHeader dates={item.dates} />
             <ShuanBody dates={item.dates} />
           </View>
         )}
