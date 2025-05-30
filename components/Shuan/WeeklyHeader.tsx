@@ -1,16 +1,30 @@
+import { format } from "date-fns";
 import { Text, View } from "react-native";
 
-const WEEK_DAYS = ["月", "火", "水", "木", "金", "土"];
+type Props = {
+  dates: Date[];
+};
 
-export function WeeklyHeader() {
+const DATE: { [day: number]: string } = {
+  0: "日",
+  1: "月",
+  2: "火",
+  3: "水",
+  4: "木",
+  5: "金",
+  6: "土"
+};
+
+export function WeeklyHeader({ dates }: Props) {
   return (
     <View style={{ flexDirection: "row", justifyContent: "center" }}>
       <Dummy />
-      {WEEK_DAYS.map((day) => {
+      {dates.map((date) => {
         return (
-          <Text key={day} style={{ flex: 1, textAlign: "center", paddingHorizontal: 4 }}>
-            {day}
-          </Text>
+          <View key={date.toISOString()} style={{ flex: 1 }}>
+            <Text style={{ textAlign: "center" }}>{DATE[date.getDay()]}</Text>
+            <Text style={{ textAlign: "center", fontSize: 8 }}>{format(date, "M/d")}</Text>
+          </View>
         );
       })}
     </View>

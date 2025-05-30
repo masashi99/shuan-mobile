@@ -131,13 +131,11 @@ const Data: ClassData[] = [
 ];
 
 type Props = {
-  weekStartDate: Date;
+  dates: Date[];
 };
 
-export function ShuanBody({ weekStartDate }: Props) {
-  const currentWeekEndDay = getWeekEndDateFromStartDate(weekStartDate);
-  const classes = filterClassesBetweenDays(Data, weekStartDate, currentWeekEndDay);
-  const dates = getDateRange(weekStartDate, currentWeekEndDay);
+export function ShuanBody({ dates }: Props) {
+  const currentClasses = filterClassesBetweenDays(Data, dates);
 
   return (
     <View style={{ flex: 1 }}>
@@ -149,7 +147,7 @@ export function ShuanBody({ weekStartDate }: Props) {
           >
             <Text style={{ width: 18, padding: 4, fontSize: 12, marginRight: 4 }}>{period.name}</Text>
             {dates.map((date, dateIndex) => {
-              const targetClassData = classes.find((classData) => {
+              const targetClassData = currentClasses.find((classData) => {
                 return classData.period === period.period && isSameDay(new Date(classData.date), date);
               });
 
@@ -175,29 +173,11 @@ export function ShuanBody({ weekStartDate }: Props) {
   );
 }
 
-function getWeekEndDateFromStartDate(startDate: Date) {
-  const endDate = new Date(startDate);
-  endDate.setDate(startDate.getDate() + 5);
-  return endDate;
-}
-
-function filterClassesBetweenDays(classes: ClassData[], startDate: Date, endDate: Date): ClassData[] {
-  if (startDate > endDate) {
-    return [];
-  }
-
+function filterClassesBetweenDays(classes: ClassData[], dates: Date[]): ClassData[] {
   return classes.filter((classData) => {
     const date = new Date(classData.date);
-    return date >= startDate && date <= endDate;
+    return dates.some((d) => isSameDay(d, date));
   });
-}
-
-function getDateRange(from: Date, to: Date): Date[] {
-  const dates: Date[] = [];
-  for (let d = new Date(from); d <= to; d.setDate(d.getDate() + 1)) {
-    dates.push(new Date(d));
-  }
-  return dates;
 }
 
 function isSameDay(a: Date, b: Date): boolean {
