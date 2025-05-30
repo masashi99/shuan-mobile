@@ -1,20 +1,10 @@
 import { Shuan } from "@/components/Shuan";
-import { ScrollView, StyleSheet, View } from "react-native";
+import { ScrollView } from "react-native";
 
-export default function App() {
+export default function Page() {
   return (
-    <View style={styles.container}>
-      <ScrollView contentContainerStyle={{ flex: 1 }}>
-        <Shuan />
-      </ScrollView>
-    </View>
+    <ScrollView contentContainerStyle={{ flex: 1, padding: 8, backgroundColor: "#fff" }}>
+      <Shuan />
+    </ScrollView>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    padding: 8
-  }
-});

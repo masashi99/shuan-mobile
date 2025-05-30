@@ -6,10 +6,17 @@ export default function RootLayout() {
     <SafeAreaView style={{ flex: 1 }} edges={["bottom"]}>
       <Drawer screenOptions={{ swipeEnabled: false }}>
         <Drawer.Screen
-          name="index"
+          name="(pages)/index"
           options={{
-            title: "Home",
-            headerTitle: "Hoge"
+            title: "週案",
+            headerTitle: "週案"
+          }}
+        />
+        <Drawer.Screen
+          name="(pages)/timetableSetting"
+          options={{
+            title: "時間割設定",
+            headerTitle: "時間割設定"
           }}
         />
       </Drawer>
