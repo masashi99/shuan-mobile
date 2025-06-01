@@ -1,4 +1,4 @@
-import { Triangle } from "lucide-react-native";
+import { ChevronDown, ChevronUp } from "lucide-react-native";
 import { createContext, use, useState } from "react";
 import { Pressable, StyleSheet, Text, View } from "react-native";
 
@@ -35,14 +35,13 @@ export function AccordionItem({ name, children }: AccordionItemProps) {
   const openStatus = use(openStatusContext);
   const update = use(updateStatusContext);
   const isOpen = openStatus === name;
-  const rotate = isOpen ? "180deg" : "0deg";
 
   return (
     <ItemNameContext.Provider value={name}>
       <Pressable onPress={() => update(name)}>
         <View style={itemStyles.container}>
           <View style={itemStyles.item}>{children}</View>
-          <Triangle size={12} style={{ transform: [{ rotate }] }} fill="black" />
+          {isOpen ? <ChevronUp size={12} /> : <ChevronDown size={12} />}
         </View>
       </Pressable>
     </ItemNameContext.Provider>
