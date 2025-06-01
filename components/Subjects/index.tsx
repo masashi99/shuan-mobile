@@ -1,4 +1,4 @@
-import { Accordion, AccordionContent, AccordionItem, AccordionTitle } from "@/components/common/Accordion";
+import { SubjectsList } from "./SubjectsList";
 import { View } from "react-native";
 
 const DummyData = [
@@ -10,14 +10,7 @@ const DummyData = [
 export function Subjects() {
   return (
     <View style={{ flex: 1 }}>
-      <Accordion>
-        {DummyData.map((item) => (
-          <AccordionItem key={item.id} name={item.name}>
-            <AccordionTitle>{item.name}</AccordionTitle>
-            <AccordionContent>{item.content}</AccordionContent>
-          </AccordionItem>
-        ))}
-      </Accordion>
+      <SubjectsList subjects={DummyData} />
     </View>
   );
 }
