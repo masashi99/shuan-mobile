@@ -1,4 +1,6 @@
+import { Fab } from "../common/Fab";
 import { SubjectsList } from "./SubjectsList";
+import { Plus } from "lucide-react-native";
 import { View } from "react-native";
 
 const DummyData = [
@@ -11,6 +13,13 @@ export function Subjects() {
   return (
     <View style={{ flex: 1 }}>
       <SubjectsList subjects={DummyData} />
+      <Fab
+        onPress={() => console.log("Pressed!")}
+        icon={Plus}
+        size={64}
+        iconColor="#fff"
+        style={{ position: "absolute", bottom: 24, right: 24 }}
+      />
     </View>
   );
 }
