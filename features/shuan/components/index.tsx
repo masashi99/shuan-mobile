@@ -9,7 +9,7 @@ type WeekData = {
   dates: Date[];
 };
 
-export function Shuan() {
+export function Progress() {
   const [currentWeekStartDay, setCurrentWeekStartDay] = useState(calcStartOfWeek(new Date()));
   const [containerWidth, setContainerWidth] = useState(0);
   const listRef = useRef<FlatList>(null);

@@ -1,4 +1,4 @@
-import { Fab } from "../common/Fab";
+import { Fab } from "../../shared/components/Fab";
 import { SubjectsList } from "./SubjectsList";
 import { Plus } from "lucide-react-native";
 import { View } from "react-native";

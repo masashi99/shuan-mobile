@@ -1,10 +1,10 @@
-import { Shuan } from "@/components/Shuan";
-import { PageContainer } from "@/components/common/PageContainer";
+import { PageContainer } from "@/features/shared/components/PageContainer";
+import { Progress } from "@/features/shuan/components";
 
 export default function Page() {
   return (
     <PageContainer>
-      <Shuan />
+      <Progress />
     </PageContainer>
   );
 }

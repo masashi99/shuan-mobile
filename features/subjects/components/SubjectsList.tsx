@@ -1,4 +1,4 @@
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/common/Accordion";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/features/shared/components/Accordion";
 import { CirclePlus } from "lucide-react-native";
 import { Pressable, Text, View } from "react-native";
 

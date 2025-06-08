@@ -1,5 +1,5 @@
-import { Timetable } from "@/components/Timetable";
-import { PageContainer } from "@/components/common/PageContainer";
+import { PageContainer } from "@/features/shared/components/PageContainer";
+import { Timetable } from "@/features/timetable/components";
 
 export default function Page() {
   return (

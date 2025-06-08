@@ -1,5 +1,5 @@
-import { Subjects } from "@/components/Subjects";
-import { PageContainer } from "@/components/common/PageContainer";
+import { PageContainer } from "@/features/shared/components/PageContainer";
+import { Subjects } from "@/features/subjects/components";
 
 export default function Page() {
   return (
