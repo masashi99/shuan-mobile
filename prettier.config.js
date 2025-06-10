@@ -4,6 +4,7 @@ module.exports = {
   printWidth: 120,
   semi: true,
   plugins: ["@trivago/prettier-plugin-sort-imports"],
-  importOrderSeparation: false,
-  importOrderSortSpecifiers: true,
+  importOrderSeparation: false
+  // importOrderSortSpecifiers: true,
+  // removeUnusedImports: false
 };

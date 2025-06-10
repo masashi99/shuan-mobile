@@ -10,7 +10,9 @@
     "ios": "expo start --ios",
     "web": "expo start --web",
     "lint": "expo lint",
-    "fix": "prettier --write --ignore-path .gitignore \"./**/*.{js,jsx,ts,tsx,json}\""
+    "fix": "prettier --write --ignore-path .gitignore \"./**/*.{js,jsx,ts,tsx,json}\"",
+    "db:generate": "drizzle-kit generate",
+    "db:migrate": "drizzle-kit migrate"
   },
   "dependencies": {
     "@expo/vector-icons": "^14.1.0",
@@ -20,6 +22,7 @@
     "@react-navigation/native": "^7.1.6",
     "date-fns": "^4.1.0",
     "dayjs": "^1.11.10",
+    "drizzle-orm": "^0.44.2",
     "expo": "53.0.9",
     "expo-blur": "~14.1.4",
     "expo-constants": "~17.1.6",
@@ -29,6 +32,7 @@
     "expo-linking": "~7.1.5",
     "expo-router": "~5.0.6",
     "expo-splash-screen": "~0.30.8",
+    "expo-sqlite": "~15.2.12",
     "expo-status-bar": "~2.2.3",
     "expo-symbols": "~0.4.4",
     "expo-system-ui": "~5.0.7",
@@ -49,6 +53,7 @@
     "@babel/core": "^7.25.2",
     "@trivago/prettier-plugin-sort-imports": "^5.2.2",
     "@types/react": "~19.0.10",
+    "drizzle-kit": "^0.31.1",
     "eslint": "^9.25.0",
     "eslint-config-expo": "~9.2.0",
     "prettier": "^3.5.3",
