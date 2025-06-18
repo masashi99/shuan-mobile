@@ -1,3 +1,5 @@
-export { courses, coursesRelations } from "./courses";
-
-export { subjects, subjectsRelations } from "./subjects";
+export * from "./courses";
+export * from "./lessonLogs";
+export * from "./subjects";
+export * from "./timeScheduleSlots";
+export * from "./weeklySchedules";
