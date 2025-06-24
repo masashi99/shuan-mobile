@@ -7,6 +7,12 @@ CREATE TABLE `courses` (
 	FOREIGN KEY (`subject_id`) REFERENCES `subjects`(`id`) ON UPDATE no action ON DELETE no action
 );
 --> statement-breakpoint
+CREATE TABLE `day_of_weeks` (
+	`id` integer PRIMARY KEY NOT NULL,
+	`label` text NOT NULL,
+	`order` integer NOT NULL
+);
+--> statement-breakpoint
 CREATE TABLE `lesson_logs` (
 	`id` text PRIMARY KEY NOT NULL,
 	`date` text NOT NULL,

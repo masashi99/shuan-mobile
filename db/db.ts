@@ -3,7 +3,13 @@ import * as schema from "./schema";
 import { drizzle } from "drizzle-orm/expo-sqlite";
 import * as SQLite from "expo-sqlite";
 
-// subjects, courses など全て export した index.ts
+// 同期的にデータベースを開く
+const expo = SQLite.openDatabaseSync("db.db");
+const db = drizzle(expo, { schema });
 
-const sqlite = await SQLite.openDatabaseAsync("local.db"); // Expoアプリ内ストレージ
-export const db = drizzle(sqlite, { schema });
+export const getDatabase = () => {
+  return db;
+};
+
+// 後方互換性のため
+export { db };

@@ -1,4 +1,5 @@
 export * from "./courses";
+export * from "./dayOfWeeks";
 export * from "./lessonLogs";
 export * from "./subjects";
 export * from "./timeScheduleSlots";
