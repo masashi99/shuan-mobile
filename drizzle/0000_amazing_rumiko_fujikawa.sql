@@ -1,21 +1,3 @@
-CREATE TABLE `day_of_weeks` (
-	`id` integer PRIMARY KEY NOT NULL,
-	`label` text NOT NULL,
-	`order` integer NOT NULL
-);
---> statement-breakpoint
-CREATE TABLE `subjects` (
-	`id` text PRIMARY KEY NOT NULL,
-	`name` text NOT NULL,
-	`total_required_lessons` integer NOT NULL
-);
---> statement-breakpoint
-CREATE TABLE `weekly_schedules` (
-	`id` text PRIMARY KEY NOT NULL,
-	`year` text NOT NULL,
-	`label` text
-);
---> statement-breakpoint
 CREATE TABLE `courses` (
 	`id` text PRIMARY KEY NOT NULL,
 	`subject_id` text NOT NULL,
@@ -23,6 +5,29 @@ CREATE TABLE `courses` (
 	`required_lessons` integer NOT NULL,
 	`order` integer NOT NULL,
 	FOREIGN KEY (`subject_id`) REFERENCES `subjects`(`id`) ON UPDATE no action ON DELETE no action
+);
+--> statement-breakpoint
+CREATE TABLE `day_of_weeks` (
+	`id` integer PRIMARY KEY NOT NULL,
+	`label` text NOT NULL,
+	`order` integer NOT NULL
+);
+--> statement-breakpoint
+CREATE TABLE `lesson_logs` (
+	`id` text PRIMARY KEY NOT NULL,
+	`date` text NOT NULL,
+	`subject_id` text NOT NULL,
+	`course_id` text,
+	`time_schedule_slot_id` text,
+	FOREIGN KEY (`subject_id`) REFERENCES `subjects`(`id`) ON UPDATE no action ON DELETE no action,
+	FOREIGN KEY (`course_id`) REFERENCES `courses`(`id`) ON UPDATE no action ON DELETE no action,
+	FOREIGN KEY (`time_schedule_slot_id`) REFERENCES `time_schedule_slots`(`id`) ON UPDATE no action ON DELETE no action
+);
+--> statement-breakpoint
+CREATE TABLE `subjects` (
+	`id` text PRIMARY KEY NOT NULL,
+	`name` text NOT NULL,
+	`total_required_lessons` integer NOT NULL
 );
 --> statement-breakpoint
 CREATE TABLE `time_schedule_slots` (
@@ -36,13 +41,8 @@ CREATE TABLE `time_schedule_slots` (
 	FOREIGN KEY (`subject_id`) REFERENCES `subjects`(`id`) ON UPDATE no action ON DELETE no action
 );
 --> statement-breakpoint
-CREATE TABLE `lesson_logs` (
+CREATE TABLE `weekly_schedules` (
 	`id` text PRIMARY KEY NOT NULL,
-	`date` text NOT NULL,
-	`subject_id` text NOT NULL,
-	`course_id` text,
-	`time_schedule_slot_id` text,
-	FOREIGN KEY (`subject_id`) REFERENCES `subjects`(`id`) ON UPDATE no action ON DELETE no action,
-	FOREIGN KEY (`course_id`) REFERENCES `courses`(`id`) ON UPDATE no action ON DELETE no action,
-	FOREIGN KEY (`time_schedule_slot_id`) REFERENCES `time_schedule_slots`(`id`) ON UPDATE no action ON DELETE no action
+	`year` text NOT NULL,
+	`label` text
 );
