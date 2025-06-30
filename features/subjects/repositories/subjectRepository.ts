@@ -22,4 +22,16 @@ export class SubjectRepository implements subjectRepositoryInterface {
       throw new Error("Failed to save subject: Unknown error occurred");
     }
   }
+
+  async findMany(): Promise<SelectSubject[]> {
+    try {
+      const result = await this.db.select().from(subjects);
+      return result;
+    } catch (error) {
+      if (error instanceof Error) {
+        throw new Error(`Failed to fetch subjects: ${error.message}`);
+      }
+      throw new Error("Failed to fetch subjects: Unknown error occurred");
+    }
+  }
 }
