@@ -3,11 +3,21 @@ import * as schema from "./schema";
 import { drizzle } from "drizzle-orm/expo-sqlite";
 import * as SQLite from "expo-sqlite";
 
-// 同期的にデータベースを開く
-const expo = SQLite.openDatabaseSync("db.db");
-const db = drizzle(expo, { schema });
+// データベースの初期化を安全に行う
+let db: ReturnType<typeof drizzle>;
 
 export const getDatabase = () => {
+  if (!db) {
+    try {
+      console.log("Initializing database...");
+      const expo = SQLite.openDatabaseSync("db.db");
+      db = drizzle(expo, { schema });
+      console.log("Database initialized successfully");
+    } catch (error) {
+      console.error("Failed to initialize database:", error);
+      throw error;
+    }
+  }
   return db;
 };
 
