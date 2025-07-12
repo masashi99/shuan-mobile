@@ -1,6 +1,9 @@
 import { Fab } from "../../shared/components/Fab";
+import { SubjectRepository } from "../repositories";
 import { SubjectsList } from "./SubjectsList";
+import { useDatabase } from "@/features/shared/providers/RepositoryProvider";
 import { Plus } from "lucide-react-native";
+import { useEffect } from "react";
 import { View } from "react-native";
 
 const DummyData = [
@@ -10,6 +13,15 @@ const DummyData = [
 ];
 
 export function Subjects() {
+  const db = useDatabase();
+  const subjectRepository = new SubjectRepository(db);
+
+  useEffect(() => {
+    subjectRepository.findMany().then((subjects) => {
+      console.log(subjects);
+    });
+  }, []);
+
   return (
     <View style={{ flex: 1 }}>
       <SubjectsList subjects={DummyData} />

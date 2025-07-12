@@ -1,9 +1,13 @@
 import { subjectRepositoryInterface } from "./subjectRepositoryInterface";
-import { getDatabase } from "@/db/db";
 import { InsertSubject, SelectSubject, subjects } from "@/db/subjects";
+import { drizzle } from "drizzle-orm/expo-sqlite";
 
 export class SubjectRepository implements subjectRepositoryInterface {
-  private db = getDatabase();
+  private db: ReturnType<typeof drizzle>;
+
+  constructor(db: ReturnType<typeof drizzle>) {
+    this.db = db;
+  }
 
   async save(subject: InsertSubject): Promise<SelectSubject> {
     try {
