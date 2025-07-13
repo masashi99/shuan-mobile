@@ -1,9 +1,10 @@
+import type { Subject } from "../types/subject";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/features/shared/components/Accordion";
 import { CirclePlus } from "lucide-react-native";
 import { Pressable, Text, View } from "react-native";
 
 type Props = {
-  subjects: any[];
+  subjects: Subject[];
 };
 
 export function SubjectsList({ subjects }: Props) {
@@ -17,10 +18,14 @@ export function SubjectsList({ subjects }: Props) {
           <AccordionTrigger>{subject.name}</AccordionTrigger>
           <AccordionContent>
             <View style={{ gap: 4, alignItems: "flex-start" }}>
-              <Text></Text>
-              <Pressable onPress={() => handlePress(subject.id)}>
-                <CirclePlus />
-              </Pressable>
+              {subject.courses.map((course) => (
+                <View key={course.id}>
+                  <Text>{course.name}</Text>
+                  <Pressable onPress={() => handlePress(subject.id)}>
+                    <CirclePlus />
+                  </Pressable>
+                </View>
+              ))}
             </View>
           </AccordionContent>
         </AccordionItem>

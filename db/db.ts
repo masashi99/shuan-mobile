@@ -4,9 +4,9 @@ import { drizzle } from "drizzle-orm/expo-sqlite";
 import * as SQLite from "expo-sqlite";
 
 // データベースの初期化を安全に行う
-let db: ReturnType<typeof drizzle>;
+let db: ReturnType<typeof drizzle<typeof schema>>;
 
-export const getDatabase = () => {
+export const getDatabase = (): ReturnType<typeof drizzle<typeof schema>> => {
   if (!db) {
     try {
       console.log("Initializing database...");

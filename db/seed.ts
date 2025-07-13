@@ -15,69 +15,148 @@ export async function seedDatabase() {
   try {
     console.log("Starting database seeding...");
 
-    // 既存データをチェックしてから挿入
-    const existingDayOfWeeks = await db.select().from(dayOfWeeks);
-    if (existingDayOfWeeks.length === 0) {
-      await db.insert(dayOfWeeks).values([
-        { id: 1, label: "月曜日", order: 1 },
-        { id: 2, label: "火曜日", order: 2 },
-        { id: 3, label: "水曜日", order: 3 },
-        { id: 4, label: "木曜日", order: 4 },
-        { id: 5, label: "金曜日", order: 5 }
-      ]);
-      console.log("Day of weeks seeded");
+    // 曜日データのシード
+    try {
+      const existingDayOfWeeks = await db.select().from(dayOfWeeks);
+      if (existingDayOfWeeks.length === 0) {
+        await db.insert(dayOfWeeks).values([
+          { id: 1, label: "月曜日", order: 1 },
+          { id: 2, label: "火曜日", order: 2 },
+          { id: 3, label: "水曜日", order: 3 },
+          { id: 4, label: "木曜日", order: 4 },
+          { id: 5, label: "金曜日", order: 5 }
+        ]);
+        console.log("Day of weeks seeded");
+      } else {
+        console.log("Day of weeks already exists, skipping...");
+      }
+    } catch (error) {
+      console.log("Day of weeks seeding skipped (may already exist):", error);
     }
 
+    // 週間スケジュールのシード
     const scheduleId = "schedule-2025";
-    const existingSchedules = await db.select().from(weeklySchedules).where(eq(weeklySchedules.id, scheduleId));
-    if (existingSchedules.length === 0) {
-      await db.insert(weeklySchedules).values({
-        id: scheduleId,
-        year: "2025",
-        label: "2025年度 5年生"
-      });
-      console.log("Weekly schedules seeded");
+    try {
+      const existingSchedules = await db.select().from(weeklySchedules).where(eq(weeklySchedules.id, scheduleId));
+      if (existingSchedules.length === 0) {
+        await db.insert(weeklySchedules).values({
+          id: scheduleId,
+          year: "2025",
+          label: "2025年度 5年生"
+        });
+        console.log("Weekly schedules seeded");
+      } else {
+        console.log("Weekly schedules already exists, skipping...");
+      }
+    } catch (error) {
+      console.log("Weekly schedules seeding skipped (may already exist):", error);
     }
 
-    const existingSubjects = await db.select().from(subjects);
-    if (existingSubjects.length === 0) {
-      await db.insert(subjects).values([
-        { id: "sub-japanese", name: "国語", totalRequiredLessons: 100 },
-        { id: "sub-math", name: "算数", totalRequiredLessons: 120 }
-      ]);
-      console.log("Subjects seeded");
+    // 科目データのシード
+    try {
+      const existingSubjects = await db.select().from(subjects);
+      if (existingSubjects.length === 0) {
+        await db.insert(subjects).values([
+          { id: "8a960900-4dda-4f83-a985-a5b9759b38e7", name: "国語", totalRequiredLessons: 100 },
+          { id: "2ebaed01-f7d3-41e0-8bd2-375931fa687d", name: "算数", totalRequiredLessons: 120 }
+        ]);
+        console.log("Subjects seeded");
+      } else {
+        console.log("Subjects already exist, skipping...");
+      }
+    } catch (error) {
+      console.log("Subjects seeding skipped (may already exist):", error);
     }
 
-    const existingCourses = await db.select().from(courses);
-    if (existingCourses.length === 0) {
-      await db.insert(courses).values([
-        { id: "course-addition", subjectId: "sub-math", name: "足し算", requiredLessons: 4, order: 1 },
-        { id: "course-subtraction", subjectId: "sub-math", name: "引き算", requiredLessons: 3, order: 2 }
-      ]);
-      console.log("Courses seeded");
+    // コースデータのシード
+    try {
+      const existingCourses = await db.select().from(courses);
+      if (existingCourses.length === 0) {
+        await db.insert(courses).values([
+          {
+            id: "761b86a6-f2fe-4152-947b-1355cfdfd188",
+            subjectId: "8a960900-4dda-4f83-a985-a5b9759b38e7", // 国語のID
+            name: "おおきなかぶ",
+            requiredLessons: 4,
+            order: 1
+          },
+          {
+            id: "a2bf9894-550e-4c26-916f-024384775614",
+            subjectId: "8a960900-4dda-4f83-a985-a5b9759b38e7", // 国語のID
+            name: "ポプラの木",
+            requiredLessons: 4,
+            order: 2
+          },
+          {
+            id: "b2b1034e-89df-4809-88ba-1fe913df8c38",
+            subjectId: "2ebaed01-f7d3-41e0-8bd2-375931fa687d", // 算数のID
+            name: "足し算",
+            requiredLessons: 4,
+            order: 1
+          },
+          {
+            id: "439c4f4b-d6e6-497c-a5fe-d24e8270fa30",
+            subjectId: "2ebaed01-f7d3-41e0-8bd2-375931fa687d", // 算数のID
+            name: "引き算",
+            requiredLessons: 3,
+            order: 2
+          }
+        ]);
+        console.log("Courses seeded");
+      } else {
+        console.log("Courses already exist, skipping...");
+      }
+    } catch (error) {
+      console.log("Courses seeding skipped (may already exist):", error);
     }
 
-    const existingTimeSlots = await db.select().from(timeScheduleSlots);
-    if (existingTimeSlots.length === 0) {
-      await db.insert(timeScheduleSlots).values([
-        { id: "slot-1", weeklyScheduleId: scheduleId, dayOfWeekId: 1, period: 1, subjectId: "sub-japanese" },
-        { id: "slot-2", weeklyScheduleId: scheduleId, dayOfWeekId: 2, period: 2, subjectId: "sub-math" }
-      ]);
-      console.log("Time schedule slots seeded");
+    // 時間割スロットのシード
+    try {
+      const existingTimeSlots = await db.select().from(timeScheduleSlots);
+      if (existingTimeSlots.length === 0) {
+        await db.insert(timeScheduleSlots).values([
+          {
+            id: "slot-1",
+            weeklyScheduleId: scheduleId,
+            dayOfWeekId: 1,
+            period: 1,
+            subjectId: "8a960900-4dda-4f83-a985-a5b9759b38e7"
+          },
+          {
+            id: "slot-2",
+            weeklyScheduleId: scheduleId,
+            dayOfWeekId: 2,
+            period: 2,
+            subjectId: "2ebaed01-f7d3-41e0-8bd2-375931fa687d"
+          }
+        ]);
+        console.log("Time schedule slots seeded");
+      } else {
+        console.log("Time schedule slots already exist, skipping...");
+      }
+    } catch (error) {
+      console.log("Time schedule slots seeding skipped (may already exist):", error);
     }
 
-    const existingLessonLogs = await db.select().from(lessonLogs);
-    if (existingLessonLogs.length === 0) {
-      await db.insert(lessonLogs).values([
-        {
-          id: "log-1",
-          date: "2025-04-07",
-          subjectId: "sub-math",
-          courseId: "course-addition",
-          timeScheduleSlotId: "slot-2"
-        }
-      ]);
-      console.log("Lesson logs seeded");
+    // 授業ログのシード
+    try {
+      const existingLessonLogs = await db.select().from(lessonLogs);
+      if (existingLessonLogs.length === 0) {
+        await db.insert(lessonLogs).values([
+          {
+            id: "log-1",
+            date: "2025-04-07",
+            subjectId: "2ebaed01-f7d3-41e0-8bd2-375931fa687d",
+            courseId: "b2b1034e-89df-4809-88ba-1fe913df8c38",
+            timeScheduleSlotId: "slot-2"
+          }
+        ]);
+        console.log("Lesson logs seeded");
+      } else {
+        console.log("Lesson logs already exist, skipping...");
+      }
+    } catch (error) {
+      console.log("Lesson logs seeding skipped (may already exist):", error);
     }
 
     console.log("Database seeding completed successfully");
