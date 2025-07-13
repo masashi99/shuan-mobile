@@ -19,8 +19,12 @@ export function SubjectsList({ subjects }: Props) {
           <AccordionContent>
             <View style={{ gap: 4, alignItems: "flex-start" }}>
               {subject.courses.map((course) => (
-                <View key={course.id}>
+                <View
+                  key={course.id}
+                  style={{ flexDirection: "row", justifyContent: "space-between", gap: 4, width: "100%" }}
+                >
                   <Text>{course.name}</Text>
+                  <Text>{course.requiredLessons}</Text>
                 </View>
               ))}
               <Pressable onPress={() => handlePress(subject.id)}>
