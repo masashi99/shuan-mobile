@@ -21,11 +21,11 @@ export function SubjectsList({ subjects }: Props) {
               {subject.courses.map((course) => (
                 <View key={course.id}>
                   <Text>{course.name}</Text>
-                  <Pressable onPress={() => handlePress(subject.id)}>
-                    <CirclePlus />
-                  </Pressable>
                 </View>
               ))}
+              <Pressable onPress={() => handlePress(subject.id)}>
+                <CirclePlus />
+              </Pressable>
             </View>
           </AccordionContent>
         </AccordionItem>
