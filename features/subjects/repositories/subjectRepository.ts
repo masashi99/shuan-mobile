@@ -25,4 +25,15 @@ export class SubjectRepository implements subjectRepositoryInterface {
       throw new Error("Failed to fetch subjects: Unknown error occurred");
     }
   }
+
+  async create(subject: Subject) {
+    try {
+      await this.db.insert(schema.subjects).values(subject);
+    } catch (error) {
+      if (error instanceof Error) {
+        throw new Error(`Failed to save subject: ${error.message}`);
+      }
+      throw new Error("Failed to save subject: Unknown error occurred");
+    }
+  }
 }
