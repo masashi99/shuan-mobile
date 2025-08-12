@@ -1,7 +1,9 @@
 import { SafeToastViewport } from "@/features/shared/components/SafeToastViewport";
 import { Providers } from "@/features/shared/providers/Providers";
+import { Link } from "expo-router";
 import { Drawer } from "expo-router/drawer";
-import { BookOpen, Calendar, CalendarCog } from "lucide-react-native";
+import { BookOpen, Calendar, CalendarCog, PlusIcon } from "lucide-react-native";
+import { Pressable } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function RootLayout() {
@@ -33,12 +35,23 @@ export default function RootLayout() {
               title: "教科設定",
               headerTitle: "教科設定",
               drawerIcon: () => <BookOpen />,
-              drawerActiveTintColor: "green"
+              drawerActiveTintColor: "green",
+              headerRight: () => <SubjectHeaderRight />
             }}
           />
         </Drawer>
         <SafeToastViewport />
       </SafeAreaView>
     </Providers>
+  );
+}
+
+function SubjectHeaderRight() {
+  return (
+    <Link href="/(stacks)/addSubject" asChild>
+      <Pressable>
+        <PlusIcon />
+      </Pressable>
+    </Link>
   );
 }
