@@ -13,6 +13,7 @@ export function Subjects() {
   const toast = useToastController();
 
   const handlePress = () => {
+    // TODO: 検証ようなので修正する
     const randomId = Math.random().toString(36).substring(2, 15);
     createSubject({
       name: "Subject" + randomId,
