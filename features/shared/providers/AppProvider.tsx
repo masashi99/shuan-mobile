@@ -1,47 +1,28 @@
-// providers/AppProvider.tsx
 import { getDatabase } from "@/db/db";
-import { seedDatabase } from "@/db/seed";
 import migrations from "@/drizzle/migrations";
 import { useMigrations } from "drizzle-orm/expo-sqlite/migrator";
 import { useDrizzleStudio } from "expo-drizzle-studio-plugin";
-import { ReactNode, useEffect, useState } from "react";
+import { ReactNode } from "react";
 
-const db = getDatabase();
+const db = getDatabase(); // ★ シングルトンであること
 
 export function AppProvider({ children }: { children: ReactNode }) {
   const { success, error } = useMigrations(db, migrations);
-  const [migrationStatus, setMigrationStatus] = useState<string>("pending");
-  const [seeded, setSeeded] = useState(false);
-  useDrizzleStudio(db);
 
-  useEffect(() => {
-    console.log("Migration status:", { success, error, migrationStatus });
+  // Drizzle Studio は開発時だけ
+  useDrizzleStudio(__DEV__ ? db : undefined);
 
-    if (error) {
-      console.error("Migration failed:", error);
-      setMigrationStatus("failed");
-      return;
-    }
+  if (error) {
+    console.error("Migration failed:", error);
+    // ここで専用エラーページに差し替えても良い
+    return null;
+  }
 
-    if (success && !seeded) {
-      console.log("Migration succeeded, seeding database...");
-      setMigrationStatus("success");
+  if (!success) {
+    // マイグレーション中は描画しない（Splash継続）
+    return null;
+  }
 
-      // シードデータを実行
-      seedDatabase()
-        .then(() => {
-          console.log("Database seeded successfully");
-          setSeeded(true);
-        })
-        .catch((seedError) => {
-          console.error("Failed to seed database:", seedError);
-        });
-    } else if (!success) {
-      console.log("Migration still in progress...");
-      setMigrationStatus("in-progress");
-    }
-  }, [success, error, migrationStatus, seeded]);
-
-  // マイグレーションが失敗した場合でもアプリを継続させる
+  // マイグレーション完了後にだけアプリを表示
   return <>{children}</>;
 }
