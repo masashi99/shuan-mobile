@@ -1,4 +1,3 @@
-import { dayOfWeeks } from "../dayOfWeeks";
 import { lessonLogs } from "../lessonLogs";
 import { subjects } from "../subjects";
 import { timeScheduleSlots } from "../timeScheduleSlots";
@@ -9,10 +8,6 @@ export const timeScheduleSlotRelations = relations(timeScheduleSlots, ({ one, ma
   weeklySchedule: one(weeklySchedules, {
     fields: [timeScheduleSlots.weeklyScheduleId],
     references: [weeklySchedules.id]
-  }),
-  dayOfWeek: one(dayOfWeeks, {
-    fields: [timeScheduleSlots.dayOfWeekId],
-    references: [dayOfWeeks.id]
   }),
   subject: one(subjects, {
     fields: [timeScheduleSlots.subjectId],

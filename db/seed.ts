@@ -1,6 +1,5 @@
 // db/seed.ts
 import { courses } from "./courses";
-import { dayOfWeeks } from "./dayOfWeeks";
 import { getDatabase } from "./db";
 import { lessonLogs } from "./lessonLogs";
 import { subjects } from "./subjects";
@@ -15,24 +14,7 @@ export async function seedDatabase() {
   try {
     console.log("Starting database seeding...");
 
-    // 曜日データのシード
-    try {
-      const existingDayOfWeeks = await db.select().from(dayOfWeeks);
-      if (existingDayOfWeeks.length === 0) {
-        await db.insert(dayOfWeeks).values([
-          { id: 1, label: "月曜日", order: 1 },
-          { id: 2, label: "火曜日", order: 2 },
-          { id: 3, label: "水曜日", order: 3 },
-          { id: 4, label: "木曜日", order: 4 },
-          { id: 5, label: "金曜日", order: 5 }
-        ]);
-        console.log("Day of weeks seeded");
-      } else {
-        console.log("Day of weeks already exists, skipping...");
-      }
-    } catch (error) {
-      console.log("Day of weeks seeding skipped (may already exist):", error);
-    }
+    // 曜日テーブルは廃止のためシードは不要
 
     // 週間スケジュールのシード
     const scheduleId = "schedule-2025";
@@ -118,14 +100,14 @@ export async function seedDatabase() {
           {
             id: "slot-1",
             weeklyScheduleId: scheduleId,
-            dayOfWeekId: 1,
+            dayOfWeek: 1,
             period: 1,
             subjectId: "8a960900-4dda-4f83-a985-a5b9759b38e7"
           },
           {
             id: "slot-2",
             weeklyScheduleId: scheduleId,
-            dayOfWeekId: 2,
+            dayOfWeek: 2,
             period: 2,
             subjectId: "2ebaed01-f7d3-41e0-8bd2-375931fa687d"
           }
