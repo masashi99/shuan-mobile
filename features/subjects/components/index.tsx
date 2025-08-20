@@ -1,10 +1,8 @@
 import { CurrentToast } from "../../shared/components/CurrentToast";
-import { Fab } from "../../shared/components/Fab";
 import { useCreateSubject } from "../api/useCreateSubject";
 import { useGetSubjects } from "../api/useGetSubjects";
 import { SubjectsList } from "./SubjectsList";
 import { useToastController } from "@tamagui/toast";
-import { Plus } from "lucide-react-native";
 import { View } from "react-native";
 
 export function Subjects() {
@@ -29,13 +27,6 @@ export function Subjects() {
   return (
     <View style={{ flex: 1 }}>
       <SubjectsList subjects={subjects ?? []} />
-      <Fab
-        onPress={handlePress}
-        icon={Plus}
-        size={64}
-        iconColor="#fff"
-        style={{ position: "absolute", bottom: 24, right: 24 }}
-      />
       <CurrentToast />
     </View>
   );
